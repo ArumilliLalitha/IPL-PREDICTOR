@@ -47,8 +47,7 @@ With the target set at {target}, {batting_team} can pace themselves carefully. T
 
 {batting_team} will aim to stay composed, rotate strike, and avoid risky shots until the chase is under control.  
 
-*Key takeaway:* Even with the numbers in their favor, momentum can flip anytime — but {batting_team} clearly holds the upper hand here.
-
+**Remember, cricket is unpredictable, and a few explosive overs or quick wickets can shift the momentum entirely!**
 """
 
     return response
