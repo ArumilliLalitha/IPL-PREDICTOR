@@ -3,35 +3,54 @@ import openai
 # Replace this with your actual OpenAI API key
 openai.api_key = "your_openai_api_key"
 
-def get_llm_explanation(data, confidence, batting_team, bowling_team, target, venue):
+def get_llm_explanation_unique(data, confidence, batting_team, bowling_team, target, venue):
     """
-    Generate a strategic explanation for the predicted match outcome.
+    Generate a unique, human-like strategic explanation and prediction summary.
     """
+
+    overs_completed = data['over_ball'][0]
+    runs_scored = data['current_score'][0]
+    wickets_lost = data['wickets'][0]
+    runs_left = data['runs_left'][0]
+    balls_left = data['balls_left'][0]
+    crr = data['crr'][0]
+    rrr = data['rrr'][0]
 
     response = f"""
-**MATCH PREDICTION SUMMARY**
---------------------------------
-**Batting Team:** {batting_team}\n
-**Bowling Team:** {bowling_team}\n
-**Venue:** {venue}\n
-**Target:** {target}\n
-**Model Confidence Score:** {confidence:.2f}  
+## MATCH INSIGHTS AND PREDICTION
 
-**MATCH STATS**
------------------------------ 
-**Overs Completed:** {data['over_ball'][0]:.1f}\n
-**Runs Scored:** {data['current_score'][0]}\n
-**Wickets Lost:** {data['wickets'][0]}\n
-**Runs Left:** {data['runs_left'][0]}\n
-**Balls Left:** {data['balls_left'][0]}\n 
-**Current Run Rate (CRR):** {data['crr'][0]:.2f}\n 
-**Required Run Rate (RRR):** {data['rrr'][0]:.2f}\n 
+**BATTLE LINE-UP:**  
+- **Batting:** {batting_team}  
+- **Bowling:** {bowling_team}  
+- **Venue:** {venue}  
+- **Chase Target:** {target}
 
-**LLM Strategic Insight:**
+---
 
-The model takes into account the current scenario including overs completed, runs left, wickets lost, and compares CRR with RRR to estimate the winning probability. If the CRR is much lower than RRR and many wickets are lost, the chances reduce significantly. However, strong batting line-ups or small grounds like Wankhede can increase the chance of successful chases even with high targets.
+## CURRENT MATCH SITUATION
 
-Remember, cricket is unpredictable, and a few explosive overs or quick wickets can shift the momentum entirely!
-    """
+| Metric                    | Value |
+|-------------------------|------:|
+| Overs Completed        | {overs_completed:.1f} |
+| Runs Scored            | {runs_scored} |
+| Wickets Lost           | {wickets_lost} |
+| Runs Left              | {runs_left} |
+| Balls Remaining        | {balls_left} |
+| Current Run Rate (CRR) | {crr:.2f} |
+| Required Run Rate (RRR)| {rrr:.2f} |
+
+✅ **Confidence in {batting_team} winning:** {confidence:.2f}
+
+---
+
+## TACTICAL VIEWPOINT
+
+With the target set at {target}, {batting_team} can pace themselves carefully. The pressure tilts towards the bowlers, knowing a single error can shift the match. Although the required run rate looks comfortable, cricket is known for unexpected twists — early wickets or tight bowling spells can still make things interesting.
+
+{batting_team} will aim to stay composed, rotate strike, and avoid risky shots until the chase is under control.  
+
+*Key takeaway:* Even with the numbers in their favor, momentum can flip anytime — but {batting_team} clearly holds the upper hand here.
+
+"""
 
     return response
