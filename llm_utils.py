@@ -3,10 +3,8 @@ import openai
 # Replace this with your actual OpenAI API key
 openai.api_key = "your_openai_api_key"
 
-def get_llm_explanation_unique(data, confidence, batting_team, bowling_team, target, venue):
-    """
-    Generate a unique, human-like strategic explanation and prediction summary.
-    """
+def get_llm_explanation(data, confidence, batting_team, bowling_team, target, venue):
+   
 
     overs_completed = data['over_ball'][0]
     runs_scored = data['current_score'][0]
